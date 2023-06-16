@@ -1,0 +1,57 @@
+1 - Criando Tabelas
+
+CREATE TABLE tamanhos (
+idtamanho number(3) NOT NULL,
+Tamanho VARCHAR(10) NOT NULL,
+PRIMARY KEY(idtamanho));
+
+CREATE TABLE tempoIrrigacao (
+idtempoIrrigacao number(3) NOT NULL,
+tempo number(3) NOT NULL,
+PRIMARY KEY(idtempoIrrigacao));
+
+CREATE TABLE Usuario (
+idUsuario number(3) NOT NULL,
+userName VARCHAR(30) NOT NULL,
+senha VARCHAR(10) NOT NULL,
+PRIMARY KEY(idUsuario));
+
+CREATE TABLE sensores (
+idsensor number(3) NOT NULL,
+endSensor VARCHAR(3) NOT NULL,
+PRIMARY KEY(idsensor));
+
+CREATE TABLE Planta
+(idPlanta number(3) NOT NULL,
+descPlanta VARCHAR(45),
+idsensor number(3),
+idtempoIrrigacao number(3),
+idtamanho number(3),
+idUsuario number(3),
+limiteRega number(3),
+atividade number(1),
+PRIMARY KEY(idPlanta),
+FOREIGN KEY(idUsuario) REFERENCES usuarios(idUsuario),
+FOREIGN KEY(idtamanho) REFERENCES tamanhos(idtamanho),
+FOREIGN KEY(idtempoIrrigacao) REFERENCES tempoIrrigacao(idtempoIrrigacao),
+FOREIGN KEY(idsensor) REFERENCES sensores(idsensor));
+
+CREATE TABLE LogOperacao (
+idLogOperacao number(3) NOT NULL,
+idTempoIrrigacao number(3) NOT NULL,
+idPlanta number(3) NOT NULL,
+PRIMARY KEY(idLogOperacao),
+FOREIGN KEY(idPlanta) REFERENCES Planta(idPlanta),
+FOREIGN KEY(idTempoIrrigacao) REFERENCES tempoIrrigacao(idTempoIrrigacao));
+
+
+
+2 - Inserindo Valores.
+
+INSERT INTO tamanhos(idtamanho, tamanho) VALUES(0, 'pequena');
+INSERT INTO tamanhos(idtamanho, tamanho) VALUES(1, 'media');
+INSERT INTO tamanho(idtamanho, tamanho) VALUES(2, 'grande');
+
+INSERT INTO tempoirrigacao(idtempoirrigacao, tempo) VALUES(0, '3');
+INSERT INTO tempoirrigacao(idtempoirrigacao, tempo) VALUES(1, '5');
+INSERT INTO tempoirrigacao(idtempoirrigacao, tempo) VALUES(2, '10'); 
